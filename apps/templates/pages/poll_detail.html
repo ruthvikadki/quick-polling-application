@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<style>
+    /* CSS styles for the form elements */
+    .option-label {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    .vote-button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: 'Arial', sans-serif;
+    }
+  
+    .vote-button:hover {
+      background-color: #45a049;
+    }
+  
+    h2 {
+      font-size: 30px;
+      margin-bottom: 20px; /* Add spacing below the heading */
+      font-family: 'Arial', sans-serif;
+    }
+    
+    form {
+      margin-top: 20px; /* Add spacing above the form */
+      margin-bottom: 20px; /* Add spacing below the form */
+    }
+
+
+</style>
+
+{% if not vote %}
+  <form method="POST">
+    {% csrf_token %}
+    <h2>{{ poll.question }}</h2>
+
+    <label class="option-label">
+      <input type="radio" name="choice" value=1>
+      {{ object.choice1 }}
+    </label><br>
+    <label class="option-label">
+      <input type="radio" name="choice" value=2>
+      {{ object.choice2 }}
+    </label><br>
+    <label class="option-label">
+      <input type="radio" name="choice" value=3>
+      {{ object.choice3 }}
+    </label><br>
+    <label class="option-label">
+      <input type="radio" name="choice" value=4>
+      {{ object.choice4 }}
+    </label><br>
+    
+    <input type="submit" class="vote-button" value="Vote">
+  </form>
+  {% else %}
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+    <div>
+      You have already participated in this Poll!!!
+    </div>
+  </div>
+{% endif %}
+{% endblock content %}

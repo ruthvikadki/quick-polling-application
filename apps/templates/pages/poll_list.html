@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  .poll-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .poll-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .poll-deadline {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  .view-poll-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  .view-poll-link:hover {
+    text-decoration: underline;
+  }
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .pagination-link {
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #007bff;
+    margin: 0 5px;
+  }
+  .pagination-link:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+</style>
+
+{% for poll in page_obj.object_list %}
+<div class="poll-card">
+  <h3 class="poll-title">{{ poll.title }}</h3>
+  <p class="poll-deadline">Deadline: {{ poll.deadline }}</p>
+  <a class="view-poll-link" href="{% url 'polls:poll_detail' poll.pk %}">View Poll</a>
+</div>
+{% endfor %}
+
+<div class="pagination">
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}" class="pagination-link">Previous</a>
+  {% endif %}
+  
+  <span class="pagination-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="pagination-link">Next</a>
+  {% endif %}
+</div>
+
+{% endblock content %}
+
+
+  
+
+

@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<style>
+  .poll-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .choice-label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .vote-count {
+    font-weight: bold;
+  }
+</style>
+
+<h1>{{ poll.question }} - Results</h1>
+
+<p>Total Votes: {{ total_votes }}</p>
+
+{% for result in results %}
+<div>
+  <label class="choice-label">
+    {{ result.choice }} - {{ result.votes }} vote(s)
+  </label>
+  {% if result.votes == total_votes %}
+    <span class="badge bg-success">Winner</span>
+  {% endif %}
+</div>
+{% endfor %}
+
+{% endblock content %}
+

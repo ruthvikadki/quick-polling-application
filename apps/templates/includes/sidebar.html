@@ -1,0 +1,39 @@
+{% load static %}
+
+<nav class="pcoded-navbar">
+  <div class="navbar-wrapper">
+    <div class="navbar-brand header-logo">
+      <a href="{% url 'index' %}" class="b-brand">
+        <div class="b-bg">
+          <i class="feather icon-trending-up"></i>
+        </div>
+        <span class="b-title">Quick Polling</span>
+      </a>
+      <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+    </div>
+    <div class="navbar-content scroll-div">
+      <ul class="nav pcoded-inner-navbar">
+        <li class="nav-item pcoded-menu-caption">
+          <label>Navigation</label>
+        </li>
+        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'index' in segment %}active{% endif %}">
+          {% if request.user.is_superuser %}
+          <a href="{% url 'polls:home' %}" class="nav-link ">
+          {% else %}
+          <a href="{% url 'index' %}" class="nav-link ">
+          {% endif %}
+            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item {% if 'tables' in segment %}active{% endif %}">
+          <a href="{%url 'polls:poll_list' %}" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-server text-c-green"></i></span><span class="pcoded-mtext">Polls</span></a>
+        </li>
+        <li class="nav-item">
+          <a href = "{% url 'polls:poll_create' %}" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Create Poll</span></a>
+        </li>       
+      </ul>
+    </div>
+  </div>
+</nav>

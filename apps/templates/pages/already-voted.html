@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+<body>
+    <h1>Already Voted</h1>
+    <p>You have already voted for this poll.</p>
+    <a href="{% url 'polls:poll_list' %}">Back to Poll List</a>
+</body>
+
+{% endblock content %}
